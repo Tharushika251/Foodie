@@ -1,0 +1,42 @@
+
+services:
+  user-service:
+    build: ./user-service
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./user-service/.env
+
+  restaurant-service:
+    build: ./restaurant-service
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./restaurant-service/.env
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "5003:5003"
+    env_file:
+      - ./order-service/.env
+  
+  payment-service:
+    build: ./payment-service
+    ports:
+      - "5002:5002"
+    env_file:
+      - ./payment-service/.env
+      
+  delivery-service:
+    build: ./delivery-service
+    ports:
+      - "5005:5005"
+    env_file:
+      - ./delivery-service/.env
+  notification-service:
+    build: ./notification-service
+    ports:
+      - "5004:5004"
+    env_file:
+      - ./notification-service/.env
