@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.IO Test</title>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>Socket.IO Connection Test</h1>
+  <div id="status">Connecting...</div>
+  <button id="join">Join Delivery Tracking</button>
+  <button id="send">Send Location Update</button>
+  <div id="messages"></div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const messagesEl = document.getElementById('messages');
+    const joinBtn = document.getElementById('join');
+    const sendBtn = document.getElementById('send');
+    
+    // Test delivery ID
+    const deliveryId = 'test-delivery-123';
+    
+    // Connect to socket server
+    const socket = io('http://localhost:5009', {
+      transports: ['websocket', 'polling']
+    });
+    
+    // Connection events
+    socket.on('connect', () => {
+      statusEl.textContent = `Connected (ID: ${socket.id})`;
+      statusEl.style.color = 'green';
+    });
+    
+    socket.on('connect_error', (error) => {
+      statusEl.textContent = `Connection Error: ${error.message}`;
+      statusEl.style.color = 'red';
+      console.error('Connection error:', error);
+    });
+    
+    socket.on('disconnect', (reason) => {
+      statusEl.textContent = `Disconnected: ${reason}`;
+      statusEl.style.color = 'red';
+    });
+    
+    // Listen for delivery location updates
+    socket.on('delivery:location', (data) => {
+      const message = document.createElement('div');
+      message.textContent = `Location Update: Lat ${data.location.latitude}, Lng ${data.location.longitude}`;
+      messagesEl.prepend(message);
+      console.log('Received location update:', data);
+    });
+    
+    // Join delivery tracking
+    joinBtn.addEventListener('click', () => {
+      socket.emit('join:delivery', deliveryId);
+      const message = document.createElement('div');
+      message.textContent = `Joined delivery tracking for ID: ${deliveryId}`;
+      messagesEl.prepend(message);
+    });
+    
+    // Send location update
+    sendBtn.addEventListener('click', () => {
+      const location = {
+        deliveryId: deliveryId,
+        latitude: 37.7749 + (Math.random() * 0.01),
+        longitude: -122.4194 + (Math.random() * 0.01)
+      };
+      
+      socket.emit('rider:location', location);
+      
+      const message = document.createElement('div');
+      message.textContent = `Sent location: Lat ${location.latitude.toFixed(4)}, Lng ${location.longitude.toFixed(4)}`;
+      messagesEl.prepend(message);
+    });
+  </script>
+</body>
+</html>
