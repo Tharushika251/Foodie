@@ -7,7 +7,6 @@ export class PaymentService implements IPaymentService {
         logger.info('Creating Payment Link');
 
         const stripe = require('stripe')('');
-        //sk_test_51RL30Q4RrwrJsL3Cd6FvKjmtNlYdaKQVRz5aXyT1ZxpfU9g8f1EjuUlI226m1qmPyygpvPcFancRe10aMJbq6R7a008XtiKRbu
 
         if (!paymentInfo.total) {
             throw new Error('Total amount is required');
