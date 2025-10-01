@@ -20,6 +20,11 @@ const RestaurantCard = ({ restaurant }) => {
             </span>
           </div>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{restaurant.address}</p>
+          {restaurant.category && (
+            <span className="inline-block mt-1 px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 rounded-full text-blue-800 dark:text-blue-200">
+              {restaurant.category}
+            </span>
+          )}
           <div className="mt-2 flex flex-wrap gap-1">
             {restaurant.tags && restaurant.tags.map((tag, index) => (
               <span key={index} className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300">

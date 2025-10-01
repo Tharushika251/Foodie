@@ -34,6 +34,7 @@ const RestaurantRegistration = () => {
     const [formData, setFormData] = useState({
         name: '',
         address: '',
+        category: '',
         openTime: '09:00',
         closeTime: '22:00',
         ownerName: '',
@@ -117,6 +118,7 @@ const RestaurantRegistration = () => {
 
         if (!formData.name.trim()) newErrors.name = 'Restaurant name is required';
         if (!formData.address.trim()) newErrors.address = 'Address is required';
+        if (!formData.category) newErrors.category = 'Restaurant category is required'; 
         if (!formData.openTime) newErrors.openTime = 'Opening time is required';
         if (!formData.closeTime) newErrors.closeTime = 'Closing time is required';
 
@@ -172,6 +174,7 @@ const RestaurantRegistration = () => {
             const restaurantData = {
                 name: formData.name,
                 address: formData.address,
+                category: formData.category, 
                 openTime: formData.openTime,
                 closeTime: formData.closeTime,
                 imageUrl: imageUrl,
@@ -256,6 +259,30 @@ const RestaurantRegistration = () => {
                                             placeholder="123 Main St, City, Country"
                                         />
                                         {errors.address && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.address}</p>}
+                                    </div>
+
+                                    <div>
+                                        <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            Restaurant Category
+                                        </label>
+                                        <select
+                                            id="category"
+                                            name="category"
+                                            value={formData.category}
+                                            onChange={handleChange}
+                                            className="mt-1 appearance-none block w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 dark:bg-slate-700 dark:text-white"
+                                            required
+                                        >
+                                            <option value="">Select Category</option>
+                                            <option value="Pizza">Pizza</option>
+                                            <option value="Pasta">Pasta</option>
+                                            <option value="Burger">Burger</option>
+                                            <option value="Chinese">Chinese</option>
+                                            <option value="Indian">Indian</option>
+                                            <option value="Thai">Thai</option>
+                                            <option value="Lankan">Lankan</option>
+                                        </select>
+                                        {errors.category && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.category}</p>}
                                     </div>
 
                                     <div className="grid grid-cols-2 gap-4">

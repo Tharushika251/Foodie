@@ -264,6 +264,24 @@ const Profile = () => {
         setRestaurant({ ...restaurant, [name]: value });
     };
 
+    // const handleRestaurantSubmit = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         setLoading(true);
+    //         const response = await api.updateRestaurant(restaurant._id, restaurant);
+    //         if (response) {
+    //             setIsEditingRestaurant(false);
+    //             setSuccessMessage('Restaurant details updated successfully!');
+    //             setTimeout(() => setSuccessMessage(''), 3000);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error updating restaurant:', error);
+    //         setSuccessMessage('Failed to update restaurant details. Please try again.');
+    //         setTimeout(() => setSuccessMessage(''), 3000);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
     const handleRestaurantSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -450,7 +468,7 @@ const Profile = () => {
 
     const getUnverifiedRestaurants = async () => {
         try {
-            const response = await api.getUnverifiedRestuarants();
+            const response = await api.getUnverifiedRestaurants();
             setUnverifiedRestaurants(response);
         } catch (error) {
             console.error('Error getting unverified restaurants:', error);

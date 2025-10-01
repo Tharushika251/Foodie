@@ -3,6 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 export interface IRestaurant {
     name: string;
     address: string;
+    category: string;
     location: {
         longitude: number;
         latitude: number;
@@ -17,6 +18,7 @@ export interface IRestaurant {
 export interface IRestaurantCreate {
     name: string;
     address: string;
+    category: string;
     location: {
         longitude: number;
         latitude: number;
@@ -40,6 +42,7 @@ const restaurantSchema: Schema = new Schema<IRestaurant>(
     {
         name: { type: String, required: true },
         address: { type: String, required: true },
+        category: { type: String, required: true },
         location: {
             longitude: { type: Number, required: true },
             latitude: { type: Number, required: true },

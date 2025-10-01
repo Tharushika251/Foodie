@@ -1,5 +1,5 @@
 const USER_SERVICE_API_URL = 'http://localhost:5000/api';
-const RESTUARANT_SERVICE_API_URL = 'http://localhost:5001/api';
+const RESTAURANT_SERVICE_API_URL = 'http://localhost:5001/api';
 const PAYMENT_SERVICE_API_URL = 'http://localhost:5002/api';
 const ORDER_SERVICE_API_URL = 'http://localhost:5003/api';
 const NOTIFICATION_SERVICE_API_URL = 'http://localhost:5004/api';
@@ -96,67 +96,67 @@ export const api = {
     
     //Restaurant
     createRestaurant: (restaurantData) =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/restaurant', {
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/restaurant', {
             method: 'POST',
             body: JSON.stringify(restaurantData)
         }),
 
     updateRestaurant: (id, restaurantData) =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/restaurant/' + id, {
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/restaurant/' + id, {
             method: 'PUT',
             body: JSON.stringify(restaurantData)
         }),
 
     createMenuItem: (restaurantData) =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/menu', {
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/menu', {
             method: 'POST',
             body: JSON.stringify(restaurantData)
         }),
 
     updateMenuItem: (restaurantId, restaurantData) =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/menu/' + restaurantId, {
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/menu/' + restaurantId, {
             method: 'PUT',
             body: JSON.stringify(restaurantData)
         }),
 
     verifyRestaurant: (restaurantId, status) =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/restaurant/verify/' + restaurantId, {
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/restaurant/verify/' + restaurantId, {
             method: 'PUT',
             body: JSON.stringify({ status: status })
         }),
 
     getRestaurantByOwnerId: (userId) =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/restaurant/owner/' + userId, {
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/restaurant/owner/' + userId, {
             method: 'GET'
         }),
 
-    getUnverifiedRestuarants: () =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/restaurant/unverified', {
+    getUnverifiedRestaurants: () =>
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/restaurant/unverified', {
             method: 'GET'
         }),
 
     deleteMenuItem: (menuId) =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/menu/' + menuId, {
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/menu/' + menuId, {
             method: 'DELETE'
         }),
 
     getMenuItemsByRestaurant: (restaurantId) =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/menu/restaurant/' + restaurantId, {
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/menu/restaurant/' + restaurantId, {
             method: 'GET'
         }),
 
-    getAllRestuarants: () =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/restaurant', {
+    getAllRestaurants: () =>
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/restaurant', {
             method: 'GET'
         }),
 
     getRestaurantById: (id) =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/restaurant/' + id, {
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/restaurant/' + id, {
             method: 'GET'
         }),
 
     getMenuItemsByRestaurant: (restaurantId) =>
-        fetchApi(RESTUARANT_SERVICE_API_URL + '/menu/restaurant/' + restaurantId, {
+        fetchApi(RESTAURANT_SERVICE_API_URL + '/menu/restaurant/' + restaurantId, {
             method: 'GET'
         }),
 

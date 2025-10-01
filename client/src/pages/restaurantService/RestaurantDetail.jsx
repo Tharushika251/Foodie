@@ -108,6 +108,11 @@ const RestaurantDetail = () => {
             <div className="max-w-7xl mx-auto">
               <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">{restaurant.name}</h1>
               <p className="text-gray-200 mb-1">{restaurant.address}</p>
+              {restaurant.category && (
+                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full text-sm font-medium mb-3">
+                  {restaurant.category}
+                </span>
+              )}
               <div className="flex items-center space-x-4 mt-3">
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                   restaurant.isOpen 
