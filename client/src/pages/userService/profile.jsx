@@ -17,8 +17,8 @@ import MenuItems from '../../components/profileComponents/MenuItems';
 import UnverifiedRestaurants from '../../components/profileComponents/UnverifiedRestaurants';
 import UnverifiedOrders from '../../components/profileComponents/UnverifiedOrders';
 
-const supabaseUrl = 'https://nelqemsnxiomtaosceui.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5lbHFlbXNueGlvbXRhb3NjZXVpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU4NTA1OTEsImV4cCI6MjA2MTQyNjU5MX0.blyjPV4hGnAQpaCyWJD1LAljPt5SWa8o4SxvWEAGAUU';
+const supabaseUrl = 'https://fqevrzpkxzdaspvghybr.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxZXZyenBreHpkYXNwdmdoeWJyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkxNDM3NTIsImV4cCI6MjA3NDcxOTc1Mn0.kAPS39YPG-BebmI986V60EU2D78SLUgr1VX8OHk1gZ0';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Profile = () => {
