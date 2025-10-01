@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import '../assets/hero.jpg'
 
 const Home = () => {
-
-
     return (
         <div >
             <HeroSection />
