@@ -37,12 +37,12 @@ A full-stack food delivery application built with microservices architecture, fe
 
 ```mermaid
 graph TB
-    FE[🌐 Frontend<br/>React App] --> US[🏠 User Service<br/>Port 5000]
-    FE --> RS[🏪 Restaurant Service<br/>Port 5001]
-    FE --> PS[💰 Payment Service<br/>Port 5002]
-    FE --> OS[📦 Order Service<br/>Port 5003]
-    FE --> NS[🔔 Notification Service<br/>Port 5004]
-    FE --> DS[🚚 Delivery Service<br/>Port 5005]
+    FE[Frontend React App] --> US[User Service Port 5000]
+    FE --> RS[Restaurant Service Port 5001]
+    FE --> PS[Payment Service Port 5002]
+    FE --> OS[Order Service Port 5003]
+    FE --> NS[Notification Service Port 5004]
+    FE --> DS[Delivery Service Port 5005]
     
     OS --> RS
     OS --> US
