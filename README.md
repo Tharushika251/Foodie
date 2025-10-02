@@ -35,26 +35,15 @@ A full-stack food delivery application built with microservices architecture, fe
 
 ### Microservices Structure
 
-```mermaid
-graph TB
-    FE[🌐 Frontend<br/>React App] --> US[🏠 User Service<br/>Port 5000]
-    FE --> RS[🏪 Restaurant Service<br/>Port 5001]
-    FE --> PS[💰 Payment Service<br/>Port 5002]
-    FE --> OS[📦 Order Service<br/>Port 5003]
-    FE --> NS[🔔 Notification Service<br/>Port 5004]
-    FE --> DS[🚚 Delivery Service<br/>Port 5005]
-    
-    OS --> RS
-    OS --> US
-    OS --> PS
-    DS --> OS
-    DS --> NS
-    NS --> US
-    
-    classDef service fill:#e1f5fe
-    classDef frontend fill:#f3e5f5
-    class US,RS,PS,OS,NS,DS service
-    class FE frontend
+| Service | Port | Description | Key Responsibilities |
+|---------|------|-------------|---------------------|
+| **User Service** | `5000` | Authentication & user management | User registration, login, profiles, JWT auth |
+| **Restaurant Service** | `5001` | Restaurant & menu management | Restaurant CRUD, menu items, verification |
+| **Payment Service** | `5002` | Payment processing | Payment gateway, transactions, webhooks |
+| **Order Service** | `5003` | Order management | Order lifecycle, status updates, history |
+| **Notification Service** | `5004` | Notifications & alerts | Email, SMS, push notifications |
+| **Delivery Service** | `5005` | Delivery & rider management | Rider assignment, real-time tracking |
+| **Frontend** | `3000` | React application | User interface, real-time updates |
 
 ### Technology Stack
 - **Frontend**: React, React Router, Leaflet Maps, Tailwind CSS
@@ -113,22 +102,23 @@ npm install
 cp .env.example .env
 # Edit .env with your API URLs
 
+
 # Running the Application
-# From backend directory
+## From backend directory
 npm run dev:all
-# From frontend directory  
+## From frontend directory  
 npm run dev
 
 # Backend (.env)-------------------------------
-# Database
+## Database
 MONGODB_URI=mongodb://localhost:27017/foodie
 DB_NAME=foodie
 
-# JWT
+## JWT
 JWT_SECRET=your_jwt_secret
 JWT_EXPIRES_IN=7d
 
-# Service Ports
+## Service Ports
 USER_SERVICE_PORT=5000
 RESTAURANT_SERVICE_PORT=5001
 PAYMENT_SERVICE_PORT=5002
@@ -136,7 +126,7 @@ ORDER_SERVICE_PORT=5003
 NOTIFICATION_SERVICE_PORT=5004
 DELIVERY_SERVICE_PORT=5005
 
-# Payment (Stripe)
+## Payment (Stripe)
 STRIPE_SECRET_KEY=your_stripe_secret_key
 STRIPE_WEBHOOK_SECRET=your_webhook_secret
 
