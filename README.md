@@ -44,6 +44,157 @@ Foodie Platform
 ├── 🚚 Delivery Service (5005) - Delivery & rider management
 └── 🌐 Frontend (React) - User interface
 
+### Technology Stack
+- **Frontend**: React, React Router, Leaflet Maps, Tailwind CSS
+- **Backend**: Node.js, Express.js, TypeScript
+- **Database**: MongoDB with Mongoose ODM
+- **Real-time**: Socket.io for live updates
+- **Authentication**: JWT (JSON Web Tokens)
+- **Payments**: Stripe integration (optional)
+- **Maps**: Leaflet with OpenStreetMap
+
+## 📦 Installation & Setup
+
+### Prerequisites
+- Node.js 
+- MongoDB 
+- npm or yarn
+
+### 1. Clone the Repository
+
+### 2. Database Setup
+# Make sure MongoDB is running
+mongod
+
+# The services will create necessary collections automatically
+
+### 3. Backend Setup
+cd server
+cd user-service
+
+cd server
+cd restaurant-service
+
+cd server
+cd payment-service
+
+cd server
+cd order-service
+
+cd server
+cd delivery-service
+
+---
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your configurations
+
+---for each terminal
+npm install
+npm run dev
+
+### 4. Frontend Setup
+cd client
+npm install
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your API URLs
+
+# Running the Application
+# From backend directory
+npm run dev:all
+# From frontend directory  
+npm run dev
+
+# Backend (.env)-------------------------------
+# Database
+MONGODB_URI=mongodb://localhost:27017/foodie
+DB_NAME=foodie
+
+# JWT
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=7d
+
+# Service Ports
+USER_SERVICE_PORT=5000
+RESTAURANT_SERVICE_PORT=5001
+PAYMENT_SERVICE_PORT=5002
+ORDER_SERVICE_PORT=5003
+NOTIFICATION_SERVICE_PORT=5004
+DELIVERY_SERVICE_PORT=5005
+
+# Payment (Stripe)
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=your_webhook_secret
+
+# Frontend (.env)-----------------------------
+VITE_USER_SERVICE_URL=http://localhost:5000/api
+VITE_RESTAURANT_SERVICE_URL=http://localhost:5001/api
+VITE_PAYMENT_SERVICE_URL=http://localhost:5002/api
+VITE_ORDER_SERVICE_URL=http://localhost:5003/api
+VITE_NOTIFICATION_SERVICE_URL=http://localhost:5004/api
+VITE_DELIVERY_SERVICE_URL=http://localhost:5005/api
+
+👥 User Roles
+1. Customer
+Browse restaurants and menus
+
+Place orders and make payments
+
+Track deliveries in real-time
+
+View order history
+
+2. Restaurant Owner
+Register and manage restaurant
+
+Add and update menu items
+
+Process and verify orders
+
+View restaurant analytics
+
+3. Delivery Rider
+Accept delivery assignments
+
+Update delivery status
+
+Real-time location sharing
+
+View delivery history and earnings
+
+📱 Usage Guide
+For Customers
+Register/Login - Create an account or sign in
+
+Browse Restaurants - Explore available restaurants
+
+Add Items to Cart - Select desired food items
+
+Checkout - Choose delivery location and payment method
+
+Track Order - Monitor order preparation and delivery
+
+For Restaurant Owners
+Register Restaurant - Complete restaurant profile
+
+Setup Menu - Add food items with prices and images
+
+Manage Orders - Accept/reject and update order status
+
+Track Performance - Monitor orders and revenue
+
+For Delivery Riders
+Go Online - Set availability for deliveries
+
+Accept Deliveries - Review and accept nearby orders
+
+Update Status - Mark orders as collected/delivered
+
+Share Location - Enable real-time tracking
+
+
 ---------------------------------------------------------
 
 <!-- # Screenshots
