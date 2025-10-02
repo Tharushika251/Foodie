@@ -40,20 +40,16 @@ A full-stack food delivery application built with microservices architecture, fe
 
 ### Microservices Structure
 
-```mermaid
-graph LR
-    A[Frontend] --> B[User Service:5000]
-    A --> C[Restaurant Service:5001]
-    A --> D[Payment Service:5002]
-    A --> E[Order Service:5003]
-    A --> F[Notification Service:5004]
-    A --> G[Delivery Service:5005]
-    
-    E --> B
-    E --> C
-    E --> D
-    G --> E
-    G --> F
+| Service | Port | Icon | Description | Key Responsibilities |
+|---------|------|------|-------------|---------------------|
+| **User Service** | `5000` | 🏠 | Authentication & user management | User registration, login, profiles, JWT auth |
+| **Restaurant Service** | `5001` | 🏪 | Restaurant & menu management | Restaurant CRUD, menu items, verification |
+| **Payment Service** | `5002` | 💰 | Payment processing | Payment gateway, transactions, webhooks |
+| **Order Service** | `5003` | 📦 | Order management | Order lifecycle, status updates, history |
+| **Notification Service** | `5004` | 🔔 | Notifications & alerts | Email, SMS, push notifications |
+| **Delivery Service** | `5005` | 🚚 | Delivery & rider management | Rider assignment, real-time tracking |
+| **Frontend** | `3000` | 🌐 | React application | User interface, real-time updates |
+
 
 ### Technology Stack
 - **Frontend**: React, React Router, Leaflet Maps, Tailwind CSS
