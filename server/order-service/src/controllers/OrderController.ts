@@ -94,6 +94,17 @@ export class OrderController {
     }
   };
 
+  getVerifiedOrders = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { restaurantId } = req.params;
+      const orders = await orderService.getVerifiedOrders(restaurantId);
+      res.json(orders);
+    } catch (error) {
+      logger.error(`Error retrieving verified orders for restaurant ${req.params.restaurantId}: ${error}`);
+      res.status(500).json({ error: 'Failed to retrieve verified orders' });
+    }
+  };
+
   getByUserId = async (req: Request, res: Response): Promise<void> => {
     try {
       const { userId } = req.params;

@@ -16,6 +16,7 @@ import RestaurantDetails from '../../components/profileComponents/RestaurantDeta
 import MenuItems from '../../components/profileComponents/MenuItems';
 import UnverifiedRestaurants from '../../components/profileComponents/UnverifiedRestaurants';
 import UnverifiedOrders from '../../components/profileComponents/UnverifiedOrders';
+import VerifiedOrders from '../restaurantService/VerifiedOrders';
 
 const supabaseUrl = 'https://fqevrzpkxzdaspvghybr.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxZXZyenBreHpkYXNwdmdoeWJyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkxNDM3NTIsImV4cCI6MjA3NDcxOTc1Mn0.kAPS39YPG-BebmI986V60EU2D78SLUgr1VX8OHk1gZ0';
@@ -38,8 +39,49 @@ const Profile = () => {
     const [editingMenuItem, setEditingMenuItem] = useState(null);
     const [unverifiedRestaurants, setUnverifiedRestaurants] = useState([]);
     const [unverifiedOrders, setUnverifiedOrders] = useState([]);
+    const [verifiedOrders, setVerifiedOrders] = useState([]);
 
     const navigate = useNavigate();
+
+    const getVerifiedOrders = async () => {
+        try {
+            if (!restaurant) return;
+
+            const response = await api.getVerifiedOrders(restaurant._id);
+
+            // Fetch customer names for each order
+            const ordersWithCustomerNames = await Promise.all(
+                response.map(async (order) => {
+                    try {
+                        const customerData = await api.getCustomerById(order.customer);
+                        return {
+                            ...order,
+                            customerName: customerData?.name || `Customer ${order.customer}`
+                        };
+                    } catch (error) {
+                        console.error(`Error fetching customer ${order.customer}:`, error);
+                        return {
+                            ...order,
+                            customerName: `Customer ${order.customer}`
+                        };
+                    }
+                })
+            );
+
+            setVerifiedOrders(ordersWithCustomerNames);
+        } catch (error) {
+            console.error('Error getting verified orders:', error);
+            setSuccessMessage('Failed to get verified orders. Please try again.');
+        }
+    };
+
+    // Update the useEffect that depends on restaurant
+    useEffect(() => {
+        if (restaurant && currentUser?.role === 'restaurant') {
+            getUnverifiedOrders();
+            getVerifiedOrders(); // Add this line
+        }
+    }, [restaurant]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -68,7 +110,7 @@ const Profile = () => {
             }));
         } catch (error) {
             console.error('Error getting orders:', error);
-            setSuccessMessage('Failed to get orders. Please try again.');
+            // setSuccessMessage('Failed to get orders. Please try again.');
         }
     };
 
@@ -199,12 +241,78 @@ const Profile = () => {
         }
     };
 
+    // const getUnverifiedOrders = async () => {
+    //     try {
+    //         if (!restaurant) return;
+
+    //         const response = await api.getUnverifiedOrders(restaurant._id);
+    //         setUnverifiedOrders(response);
+    //     } catch (error) {
+    //         console.error('Error getting unverified orders:', error);
+    //         setSuccessMessage('Failed to get unverified orders. Please try again.');
+    //     }
+    // };
+
+    // const getUnverifiedOrders = async () => {
+    //     try {
+    //         if (!restaurant) return;
+
+    //         const response = await api.getUnverifiedOrders(restaurant._id);
+
+    //         // Fetch customer names for each order
+    //         const ordersWithCustomerNames = await Promise.all(
+    //             response.map(async (order) => {
+    //                 try {
+    //                     // Fetch customer details using the customer ID
+    //                     const customerData = await api.getCustomerById(order.customer);
+    //                     return {
+    //                         ...order,
+    //                         customerName: customerData.name || `Customer ${order.customer}`
+    //                     };
+    //                 } catch (error) {
+    //                     console.error(`Error fetching customer ${order.customer}:`, error);
+    //                     return {
+    //                         ...order,
+    //                         customerName: `Customer ${order.customer}`
+    //                     };
+    //                 }
+    //             })
+    //         );
+
+    //         setUnverifiedOrders(ordersWithCustomerNames);
+    //     } catch (error) {
+    //         console.error('Error getting unverified orders:', error);
+    //         setSuccessMessage('Failed to get unverified orders. Please try again.');
+    //     }
+    // };
+
     const getUnverifiedOrders = async () => {
         try {
             if (!restaurant) return;
 
             const response = await api.getUnverifiedOrders(restaurant._id);
-            setUnverifiedOrders(response);
+
+            // Fetch customer names for each order
+            const ordersWithCustomerNames = await Promise.all(
+                response.map(async (order) => {
+                    try {
+                        // Fetch customer details using the customer ID (user_id)
+                        const customerData = await api.getCustomerById(order.customer);
+                        return {
+                            ...order,
+                            customerName: customerData?.name || `Customer ${order.customer}`
+                        };
+                    } catch (error) {
+                        console.error(`Error fetching customer ${order.customer}:`, error);
+                        return {
+                            ...order,
+                            customerName: `Customer ${order.customer}`
+                        };
+                    }
+                })
+            );
+
+            setUnverifiedOrders(ordersWithCustomerNames);
         } catch (error) {
             console.error('Error getting unverified orders:', error);
             setSuccessMessage('Failed to get unverified orders. Please try again.');
@@ -611,6 +719,7 @@ const Profile = () => {
                                     { id: 'orders', label: 'Order History', visible: formData.role === 'customer' },
                                     { id: 'riding', label: 'Riding History', visible: formData.role === 'rider' },
                                     { id: 'unverified', label: 'Unverified Restaurants', visible: formData.role === 'admin' },
+                                    { id: 'verified-orders', label: 'Verified Orders', visible: formData.role === 'restaurant' },
                                 ].filter(tab => tab.visible).map(tab => (
                                     <button
                                         key={tab.id}
@@ -697,6 +806,13 @@ const Profile = () => {
                                     restaurants={unverifiedRestaurants}
                                     handleVerify={handleVerifyRestaurant}
                                     handleDecline={handleDeclineRestaurant}
+                                />
+                            )}
+
+                            {activeTab === 'verified-orders' && formData.role === 'restaurant' && (
+                                <VerifiedOrders
+                                    orders={verifiedOrders}
+                                    viewOrderDetails={(order) => setSelectedOrder(order)}
                                 />
                             )}
 

@@ -92,8 +92,12 @@ export const api = {
 
     getCurrentUser: (email) =>
         fetchApi(`${USER_SERVICE_API_URL}/users/${email}`),
-
     
+    getCustomerById: (customerId) =>
+        fetchApi(USER_SERVICE_API_URL + '/users/id/' + customerId, {
+            method: 'GET'
+        }),
+
     //Restaurant
     createRestaurant: (restaurantData) =>
         fetchApi(RESTAURANT_SERVICE_API_URL + '/restaurant', {
@@ -175,6 +179,11 @@ export const api = {
 
     getUnverifiedOrders: (restaurantId) =>
         fetchApi(ORDER_SERVICE_API_URL + '/order/verify/' + restaurantId, {
+            method: 'GET'
+        }),
+
+    getVerifiedOrders: (restaurantId) =>
+        fetchApi(ORDER_SERVICE_API_URL + '/order/verified/' + restaurantId, {
             method: 'GET'
         }),
 
