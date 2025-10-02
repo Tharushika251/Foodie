@@ -35,26 +35,25 @@ A full-stack food delivery application built with microservices architecture, fe
 
 ### Microservices Structure
 
+```markdown
+## 🏗️ System Architecture
+
+### Microservices Structure
+
 ```mermaid
-graph TB
-    FE[Frontend React App] --> US[User Service Port 5000]
-    FE --> RS[Restaurant Service Port 5001]
-    FE --> PS[Payment Service Port 5002]
-    FE --> OS[Order Service Port 5003]
-    FE --> NS[Notification Service Port 5004]
-    FE --> DS[Delivery Service Port 5005]
+graph LR
+    A[Frontend] --> B[User Service:5000]
+    A --> C[Restaurant Service:5001]
+    A --> D[Payment Service:5002]
+    A --> E[Order Service:5003]
+    A --> F[Notification Service:5004]
+    A --> G[Delivery Service:5005]
     
-    OS --> RS
-    OS --> US
-    OS --> PS
-    DS --> OS
-    DS --> NS
-    NS --> US
-    
-    classDef service fill:#e1f5fe
-    classDef frontend fill:#f3e5f5
-    class US,RS,PS,OS,NS,DS service
-    class FE frontend
+    E --> B
+    E --> C
+    E --> D
+    G --> E
+    G --> F
 
 ### Technology Stack
 - **Frontend**: React, React Router, Leaflet Maps, Tailwind CSS
