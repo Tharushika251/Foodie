@@ -31,18 +31,30 @@ A full-stack food delivery application built with microservices architecture, fe
 - **Route Optimization** - Navigation to restaurants and customers
 - **Delivery History** - Track completed deliveries and earnings
 
-## 🏗️ Architecture
+## 🏗️ System Architecture
 
 ### Microservices Structure
 
-Foodie Platform
-├── 🏠 User Service (5000) - Authentication & user management
-├── 🏪 Restaurant Service (5001) - Restaurant & menu management
-├── 💰 Payment Service (5002) - Payment processing
-├── 📦 Order Service (5003) - Order management
-├── 🔔 Notification Service (5004) - Notifications & alerts
-├── 🚚 Delivery Service (5005) - Delivery & rider management
-└── 🌐 Frontend (React) - User interface
+```mermaid
+graph TB
+    FE[🌐 Frontend<br/>React App] --> US[🏠 User Service<br/>Port 5000]
+    FE --> RS[🏪 Restaurant Service<br/>Port 5001]
+    FE --> PS[💰 Payment Service<br/>Port 5002]
+    FE --> OS[📦 Order Service<br/>Port 5003]
+    FE --> NS[🔔 Notification Service<br/>Port 5004]
+    FE --> DS[🚚 Delivery Service<br/>Port 5005]
+    
+    OS --> RS
+    OS --> US
+    OS --> PS
+    DS --> OS
+    DS --> NS
+    NS --> US
+    
+    classDef service fill:#e1f5fe
+    classDef frontend fill:#f3e5f5
+    class US,RS,PS,OS,NS,DS service
+    class FE frontend
 
 ### Technology Stack
 - **Frontend**: React, React Router, Leaflet Maps, Tailwind CSS
