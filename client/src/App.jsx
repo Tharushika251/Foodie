@@ -32,6 +32,6 @@ function App() {
       <Route path="/delivery/:orderId" element={<DeliveryTracking />} />
     </Routes>
   )
-}
+} 
 
 export default App

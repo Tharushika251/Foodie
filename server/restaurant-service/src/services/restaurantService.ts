@@ -5,6 +5,7 @@ export interface RestaurantWithOpenStatus {
     _id: mongoose.Types.ObjectId;
     name: string;
     address: string;
+    category: string;
     ownerId: mongoose.Types.ObjectId;
     openTime: string;
     closeTime: string;

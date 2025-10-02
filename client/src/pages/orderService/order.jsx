@@ -15,23 +15,61 @@ const Order = () => {
   const [orderCreated, setOrderCreated] = useState(false);
   const [paymentFailed, setPaymentFailed] = useState(false);
 
-
-  if (!localStorage.getItem("orderDetails")) {
-    navigate("/")
-  }
-
-  const initialOrderDetails = JSON.parse(localStorage.getItem("orderDetails"));
-  const [orderDetails, setOrderDetails] = useState(initialOrderDetails);
-
+  // Move the localStorage check to useEffect
+  const [orderDetails, setOrderDetails] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState('cash');
   const [isLoading, setIsLoading] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
+  const [loginError, setLoginError] = useState(null); // Added missing state
 
-  const subtotal = orderDetails.items.reduce((sum, item) => {
+  // Check for orderDetails on component mount
+  useEffect(() => {
+    const storedOrderDetails = localStorage.getItem("orderDetails");
+    if (!storedOrderDetails) {
+      navigate("/");
+      return;
+    }
+    setOrderDetails(JSON.parse(storedOrderDetails));
+  }, [navigate]);
+
+  // Payment status effect
+  useEffect(() => {
+    if (status && !orderCreated && orderDetails) {
+      console.log(status);
+      if (status === "success") {
+        createOrder(customerId);
+        setOrderCreated(true);
+      } else if (status === "failed" || status === "cancel") {
+        setPaymentFailed(true);
+      }
+    }
+  }, [status, orderCreated, customerId, orderDetails]);
+
+  const createOrder = (userid) => {
+    if (!orderDetails) return;
+
+    api.createOrder({
+      customer: userid,
+      restaurant: orderDetails.restaurantId,
+      restaurantLocation: orderDetails.restaurantLocation,
+      customerLocation: orderDetails.customerLocation,
+      items: orderDetails.items,
+      paymentMethod,
+      orderAmount: subtotal,
+      deliveryFee,
+      total
+    });
+
+    localStorage.removeItem("orderDetails");
+    setOrderComplete(true);
+  };
+
+  // Calculate order totals only when orderDetails exists
+  const subtotal = orderDetails ? orderDetails.items.reduce((sum, item) => {
     return sum + (item.menuItemPrice * item.qty);
-  }, 0);
+  }, 0) : 0;
 
-  const deliveryFee = 100 + (30 * orderDetails.deliveryDistance);
+  const deliveryFee = orderDetails ? 100 + (30 * orderDetails.deliveryDistance) : 0;
   const total = subtotal + deliveryFee;
 
   const handlePaymentMethodChange = (e) => {
@@ -39,6 +77,8 @@ const Order = () => {
   };
 
   const updateItemQuantity = (menuItemId, newQty) => {
+    if (!orderDetails) return;
+
     if (newQty <= 0) {
       removeItem(menuItemId);
       return;
@@ -54,6 +94,8 @@ const Order = () => {
   };
 
   const removeItem = (menuItemId) => {
+    if (!orderDetails) return;
+
     const updatedItems = orderDetails.items.filter(item => item.menuItemId !== menuItemId);
 
     if (updatedItems.length === 0) {
@@ -69,81 +111,57 @@ const Order = () => {
 
   const handleSubmitOrder = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    console.log('Order submitted:', {
-      customer: currentUser?.user_id,
-      restaurant: orderDetails.restaurantId,
-      restaurantLocation: orderDetails.restaurantLocation,
-      customerLocation: orderDetails.customerLocation,
-      items: orderDetails.items,
-      paymentMethod,
-      orderAmount: subtotal,
-      deliveryFee,
-      total
-    });
+    if (!orderDetails) return;
 
-    if (paymentMethod == "cash") {
+    setIsLoading(true);
+
+    if (paymentMethod === "cash") {
       createOrder(currentUser?.user_id);
     } else {
-      setIsLoading(true)
-      api.createPaymentLink({
-        customer: currentUser?.user_id,
-        restaurant: orderDetails.restaurantId,
-        restaurantLocation: orderDetails.restaurantLocation,
-        customerLocation: orderDetails.customerLocation,
-        items: orderDetails.items,
-        paymentMethod,
-        orderAmount: subtotal,
-        deliveryFee,
-        total
-      }).then((paymentLink) => {
-        console.log(paymentLink)
+      try {
+        const paymentLink = await api.createPaymentLink({
+          customer: currentUser?.user_id,
+          restaurant: orderDetails.restaurantId,
+          restaurantLocation: orderDetails.restaurantLocation,
+          customerLocation: orderDetails.customerLocation,
+          items: orderDetails.items,
+          paymentMethod,
+          orderAmount: subtotal,
+          deliveryFee,
+          total
+        });
+        console.log(paymentLink);
         window.location.href = paymentLink;
-      });
-
+      } catch (error) {
+        console.error('Payment link creation failed:', error);
+        setLoginError('Failed to create payment link. Please try again.');
+      }
     }
     setIsLoading(false);
-    setOrderComplete(true)
-  };
-
-  const createOrder = (userid) => {
-    api.createOrder({
-      customer: userid,
-      restaurant: orderDetails.restaurantId,
-      restaurantLocation: orderDetails.restaurantLocation,
-      customerLocation: orderDetails.customerLocation,
-      items: orderDetails.items,
-      paymentMethod,
-      orderAmount: subtotal,
-      deliveryFee,
-      total
-    });
-
-    localStorage.removeItem("orderDetails")
   };
 
   const handleBackToHome = () => {
     navigate('/');
   };
 
-  useEffect(() => {
-    if (status && !orderCreated) {
-      console.log(status);
-      if (status == "success") {
-        createOrder(customerId);
-        setOrderComplete(true);
-        setOrderCreated(true);
-      } else if (status == "failed" || status == "cancel") {
-        setPaymentFailed(true);
-      }
-    }
-  }, [status, orderCreated]);
-
   const handleTryAgain = () => {
     setPaymentFailed(false);
-    navigate('/order');
+    window.location.reload();
   };
 
+  // Don't render anything until orderDetails is loaded - moved to AFTER all hooks
+  if (!orderDetails) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${darkMode ? 'bg-slate-900' : 'bg-gray-100'}`}>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto"></div>
+          <p className={`mt-4 ${darkMode ? 'text-white' : 'text-gray-600'}`}>Loading order...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Rest of your JSX remains the same...
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-slate-900 text-white' : 'bg-gray-100 text-gray-800'}`}>
       <div className="container mx-auto py-8 px-4">

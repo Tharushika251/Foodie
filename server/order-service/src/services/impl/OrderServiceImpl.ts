@@ -94,6 +94,21 @@ export class OrderService implements IOrderService {
         return updated || null;
     }
 
+    async getVerifiedOrders(restaurantId: string): Promise<IOrder[]> {
+        logger.info({ restaurantId }, 'Fetching verified orders for restaurant');
+        try {
+            const orders = await Order.find({
+                restaurant: restaurantId,
+                status: { $in: ['accepted', 'completed'] }
+            }).sort({ placedAt: -1 });
+            logger.info(`Found ${orders.length} verified orders`);
+            return orders;
+        } catch (error) {
+            logger.error({ error, restaurantId }, 'Error fetching verified orders');
+            throw error;
+        }
+    }
+
     async deleteOrder(orderId: string): Promise<boolean> {
         logger.info(`Deleting order ${orderId}`);
         const result = await Order.deleteOne({ order_id: orderId });

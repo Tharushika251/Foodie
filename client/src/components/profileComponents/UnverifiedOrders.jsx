@@ -2,6 +2,9 @@ import React from 'react';
 import { Check, X, Eye } from 'lucide-react';
 
 const UnverifiedOrders = ({ orders, handleVerify, handleDecline, viewOrderDetails }) => {
+  console.log('Orders data:', orders);
+  console.log('First order:', orders[0]);
+
   if (!orders || orders.length === 0) {
     return (
       <div className="text-center py-10">
@@ -21,7 +24,7 @@ const UnverifiedOrders = ({ orders, handleVerify, handleDecline, viewOrderDetail
       <p className="mb-4 text-gray-600 dark:text-gray-300">
         Verify or decline orders placed at your restaurant
       </p>
-      
+
       <div className="bg-white dark:bg-slate-700 rounded-lg shadow overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200 dark:divide-slate-600">
           <thead className="bg-gray-50 dark:bg-slate-800">
@@ -50,7 +53,7 @@ const UnverifiedOrders = ({ orders, handleVerify, handleDecline, viewOrderDetail
                   {order.order_id}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                  {order.customerName}
+                  {order.customerName || order.customer}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                   {new Date(order.placedAt).toLocaleString()}

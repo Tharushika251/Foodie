@@ -48,6 +48,27 @@ const RestaurantDetails = ({
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Category
+              </label>
+              <select
+                name="category"
+                value={restaurant.category || ''}
+                onChange={handleRestaurantChange}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:bg-slate-700 dark:text-white"
+                required
+              >
+                <option value="">Select Category</option>
+                <option value="Pizza">Pizza</option>
+                <option value="Pasta">Pasta</option>
+                <option value="Burger">Burger</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Indian">Indian</option>
+                <option value="Thai">Thai</option>
+                <option value="Lankan">Lankan</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Address
               </label>
               <input
@@ -157,9 +178,13 @@ const RestaurantDetails = ({
                 <p className="text-lg font-semibold text-gray-800 dark:text-white">{restaurant.name}</p>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Address</h3>
-                <p className="text-lg font-semibold text-gray-800 dark:text-white">{restaurant.address}</p>
-              </div>
+                <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Category</h3>
+                <p className="text-lg font-semibold text-gray-800 dark:text-white">{restaurant.category}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Address</h3>
+                  <p className="text-lg font-semibold text-gray-800 dark:text-white">{restaurant.address}</p>
+                </div>
               <div className="flex space-x-6">
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Opening Time</h3>

@@ -12,5 +12,6 @@ orderRouter.get('/:orderId', controller.getById);
 orderRouter.get('/user/:userId', controller.getByUserId);
 orderRouter.get('/verify/:restaurantId', controller.getUnverifiedOrders);
 orderRouter.get('/', controller.getAll);
+orderRouter.get('/verified/:restaurantId', controller.getVerifiedOrders);
 
 export default orderRouter;

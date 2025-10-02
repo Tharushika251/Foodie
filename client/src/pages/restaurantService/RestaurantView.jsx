@@ -16,7 +16,7 @@ const RestaurantList = () => {
     const fetchRestaurants = async () => {
       try {
         setIsLoading(true);
-        const response = await api.getAllRestuarants();
+        const response = await api.getAllRestaurants();
         setRestaurants(response);
         setFilteredRestaurants(response);
       } catch (err) {
@@ -29,21 +29,37 @@ const RestaurantList = () => {
     fetchRestaurants();
   }, []);
 
+  // useEffect(() => {
+  //   const results = restaurants.filter(restaurant => {
+  //     const matchesSearch = 
+  //       restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //       (restaurant.tags && restaurant.tags.some(tag => 
+  //         tag.toLowerCase().includes(searchTerm.toLowerCase())
+  //       ));
+      
+  //     const matchesCategory = 
+  //       selectedCategory === 'All' || 
+  //       (restaurant.tags && restaurant.tags.includes(selectedCategory));
+      
+  //     return matchesSearch && matchesCategory;
+  //   });
+    
+  //   setFilteredRestaurants(results);
+  // }, [searchTerm, selectedCategory, restaurants]);
+
   useEffect(() => {
     const results = restaurants.filter(restaurant => {
-      const matchesSearch = 
+      const matchesSearch =
         restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (restaurant.tags && restaurant.tags.some(tag => 
-          tag.toLowerCase().includes(searchTerm.toLowerCase())
-        ));
-      
-      const matchesCategory = 
-        selectedCategory === 'All' || 
-        (restaurant.tags && restaurant.tags.includes(selectedCategory));
-      
+        (restaurant.category && restaurant.category.toLowerCase().includes(searchTerm.toLowerCase()));
+
+      const matchesCategory =
+        selectedCategory === 'All' ||
+        restaurant.category === selectedCategory;
+
       return matchesSearch && matchesCategory;
     });
-    
+
     setFilteredRestaurants(results);
   }, [searchTerm, selectedCategory, restaurants]);
 
