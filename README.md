@@ -31,6 +31,8 @@ A full-stack food delivery application built with microservices architecture, fe
 - **Route Optimization** - Navigation to restaurants and customers
 - **Delivery History** - Track completed deliveries and earnings
 
+
+
 ## 🏗️ System Architecture
 
 ### Microservices Structure
@@ -199,70 +201,84 @@ Share Location - Enable real-time tracking
 
 ---------------------------------------------------------
 
-<!-- # Screenshots
+# Screenshots
+(If it takes longer time to load script you can use assets folder screenshots for reference)
 
 # Dark Mode Screenshots
 
-## HomePage
-![Dark Mode](assets/dark-home.png)
-## LeaderBoard
-![Dark Mode](assets/dark-leaderboard-highScore.png)
-## Quiz List
-![Dark Mode](assets/dark-quizList.png)
+## Customer
+![Dark Mode](assets/d_home.png)
+![Dark Mode](assets/d_customer_signup.png)
+![Dark Mode](assets/d_signin.png)
+![Dark Mode](assets/d_signin.png)
+![Dark Mode](assets/d_restaurants.png)
+![Dark Mode](assets/d_1_res.png)
+![Dark Mode](assets/d_cart.png)
+![Dark Mode](assets/d_cus_profile.png)
+![Dark Mode](assets/d_delivery_tracking_accepted.png)
+![Dark Mode](assets/d_delivery_tracking_completed.png)
+![Dark Mode](assets/d_edit_profile.png)
+![Dark Mode](assets/d_location_confirm.png)
+![Dark Mode](assets/d_order_history.png)
+![Dark Mode](assets/d_order_placed.png)
+![Dark Mode](assets/d_payment_type.png)
+![Dark Mode](assets/d_search_menu.png)
+![Dark Mode](assets/d_search_res.png)
+![Dark Mode](assets/d_view_order_history_details.png)
+![Dark Mode](assets/payment_by_card.png)
 
-# Teacher Dashboard
+## Restaurant Admin
+![Dark Mode](assets/d_restaurant_admin_profile.png)
+![Dark Mode](assets/d_res_owner_details_profile.png)
+![Dark Mode](assets/d_res_details_edit_profile.png)
+![Dark Mode](assets/d_res_menu_items_profile.png)
+![Dark Mode](assets/d_res_pending.png)
+![Dark Mode](assets/d_res_verified_orders.png)
+![Dark Mode](assets/d_res_verified_order_details.png)
+![Dark Mode](assets/d_res_verified_order_details_see_more.png)
 
-## Profile
-![Dark Mode](assets/teacher/dark-profile.png)
-## Create Quiz
-![Dark Mode](assets/teacher/dark-createQuiz.png)
-## Edit and Delete Quiz and questions
-![Dark Mode](assets/teacher/dark-editQuiz.png)
+## Admin
+![Dark Mode](assets/d_admin_verify_restaurant.png)
 
-# Student Dashboard
+## Rider
+![Dark Mode](assets/d_rider_signup.png)
 
-## Profile
-![Dark Mode](assets/student/dark-profile.png)
-## Start Quiz
-![Dark Mode](assets/student/dark-startQuiz.png)
-## Questions
-![Dark Mode](assets/student/dark-questions.png)
-## Result
-![Dark Mode](assets/student/dark-result.png)
-## Mistake Review
-![Dark Mode](assets/student/dark-mistakeReview.png)
-## Score History with graph comparison and Generate Report
-![Dark Mode](assets/student/dark-myScore.png)
 
 # Light Mode Screenshots
 
-## HomePage
-![Light Mode](assets/home.png)
-## LeaderBoard
-![Light Mode](assets/leaderboard-highScore.png)
-## Quiz List
-![Light Mode](assets/quizList.png)
+## Customer
+![Light Mode](assets/l_home.png)
+![Light Mode](assets/l_customer_signup.png)
+![Light Mode](assets/l_signin.png)
+![Light Mode](assets/l_restaurants.png)
+![Light Mode](assets/l_1_res.png)
+![Light Mode](assets/l_cart.png)
+![Light Mode](assets/l_cus_profile.png)
+![Light Mode](assets/l_delivery_tracking_accepted.png)
+![Light Mode](assets/l_delivery_tracking_completed.png)
+![Light Mode](assets/l_edit_profile.png)
+![Light Mode](assets/l_location_confirm.png)
+![Light Mode](assets/l_location_confirm.png)
+![Light Mode](assets/l_order_placed.png)
+![Light Mode](assets/l_payment_type.png)
+![Light Mode](assets/l_search_menu.png)
+![Light Mode](assets/l_search_res.png)
+![Light Mode](assets/l_view_order_history_details.png)
+![Light Mode](assets/payment_by_card.png)
 
-# Teacher Dashboard
+## Restaurant Admin
+![Light Mode](assets/l_restaurant_admin_profile.png)
+![Light Mode](assets/l_res_owner_details_profile.png)
+![Light Mode](assets/l_res_details_edit_profile.png)
+![Light Mode](assets/l_res_menu_items_profile.png)
+![Light Mode](assets/l_res_pending.png)
+![Light Mode](assets/l_res_verified_orders.png)
+![Light Mode](assets/l_res_verified_order_details.png)
+![Light Mode](assets/l_res_verified_order_details_see_more.png)
 
-## Profile
-![Light Mode](assets/teacher/profile.png)
-## Create Quiz
-![Light Mode](assets/teacher/createQuiz.png)
-## Edit and Delete Quiz and questions
-![Light Mode](assets/teacher/editQuiz.png)
+## Admin
+![Light Mode](assets/l_admin_verify_restaurant.png)
 
-# Student Dashboard
+## Rider
+![Light Mode](assets/l_rider_signup.png)
 
-## Profile
-![Light Mode](assets/student/profile.png)
-## Start Quiz
-![Light Mode](assets/student/startQuiz.png)
-## Questions
-![Light Mode](assets/student/questions.png)
-## Result
-![Light Mode](assets/student/result.png)
-## Mistake Review
-![Light Mode](assets/student/mistakeReview.png)
-## Score History with graph comparison and Generate Report
-![Light Mode](assets/student/myScore.png) -->
