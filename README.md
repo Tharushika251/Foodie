@@ -3,7 +3,7 @@
 
 # 🍕 Foodie - Food Delivery Platform
 
-A full-stack food delivery application built with microservices architecture, featuring real-time order tracking, multiple payment options, and a seamless user experience.
+A full-stack food delivery application built with microservices architecture, featuring real-time order tracking, multiple payment options, and a seamless user experience with dark and light mode.
 
 ![Foodie Platform](https://img.shields.io/badge/Foodie-Delivery_Platform-green)
 ![Microservices](https://img.shields.io/badge/Architecture-Microservices-blue)
