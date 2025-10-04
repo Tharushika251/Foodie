@@ -202,6 +202,7 @@ Share Location - Enable real-time tracking
 ---------------------------------------------------------
 
 # Screenshots
+(If it takes longer time to load script you can use assets folder screenshots for reference)
 
 # Dark Mode Screenshots
 
